@@ -1,14 +1,15 @@
 ## The functions given here set and get the matrix and its inverse
 
-makeCacheMatrix <- function(x = matrix()) {
-inv <- NULL
-set <- function(y){
-	x <<- y
-	inv <<- NULL
+makeCacheMatrix <- function(x = matrix()) {			# x should be matrix input
+inv <- NULL											#initialize inverse as NULL	
+set <- function(y){									# set the value of x
+	x <<- y																	
+	inv <<- NULL									#set the value of inverse as null
 }
-get <- function() x
-setInverse <- function(invrse) inv <<- invrse
+get <- function() x									#get x value
+setInverse <- function(invrse) inv <<- invrse 		#set inverse value
 getInverse	<- function() inv
+#return a list of functions
 list(set = set,get = get,setInverse = setInverse, getInverse = getInverse)
 }
 
@@ -18,14 +19,13 @@ list(set = set,get = get,setInverse = setInverse, getInverse = getInverse)
 ## if it doesn't compute and return
 
 cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-inv <- x$getInverse()
-if(!is.null(inv)){
+inv <- x$getInverse() #get inverse of matrix
+if(!is.null(inv)){	#check if the inverse is present
 	print("Getting inverse from memory, please wait...")
-	return(inv)
+	return(inv) #Return inverse
 }
-mtrx <- x$get()
-inv <- solve(mtrx)
-x$setInverse(inv)
-inv
+mtrx <- x$get() #get the value of x
+inv <- solve(mtrx,...) #solve for the matrix
+x$setInverse(inv) #set inverse
+inv 			  #return inverse
 }
